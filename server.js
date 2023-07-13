@@ -105,12 +105,16 @@ function viewDepartments() {
 
 // Function to view all roles
 function viewRoles() {
-  const query = `
-    SELECT role.id, role.title, role.salary, department.name AS department
-    FROM role
-    INNER JOIN department ON role.department_id = department.id
-  `;
-  connection.query(query, function(err, res) {
+  connection.query('SELECT * FROM role', function(err, res) {
+    if (err) throw err;
+    console.table(res);
+    startApp();
+  });
+}
+
+// Function to view all employees
+function viewEmployees() {
+  connection.query('SELECT * FROM employee', function(err, res) {
     if (err) throw err;
     console.table(res);
     startApp();
