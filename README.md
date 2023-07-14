@@ -1,5 +1,5 @@
-# Note_taker_machine
-The project for week 11---Creating not taker that uses express.js back end to save and retireve notes.
+# CMS Employee Tracker
+The project for week 12---Creating an employee tracker
 
 ## Table of Contents
  - [Installation](#installation)
@@ -14,18 +14,36 @@ The project for week 11---Creating not taker that uses express.js back end to sa
 You will need:
 1. Node downloaded onto your machine.
 2. Express also downloaded and initiated.
-3. an open browser(Insomnia is recommended).
+3. Inquirer package downloaded and initiated.
 
 ## Usage
-This web application has two pages, one, the landing page will have a button that when clicked will take to a note-taking page. It will allow you to enter in a note title and note text. The note will then be subseqently saved to the left of the page, along with previous notes.
+Enter node server into the command terminal to initiate the program, then you will be presented with many options to interact with the employee database. Follow the subsequent promptings in order to add, delete or upadate the database! Or hit exit to exit.
 
 ## License
 This project does not currently have a license.
 
 ## Features
-Some of the many features of this program include:
-- back end database for storage of the notes
-- * feature for any other URL's that are not /api/notes.
+There are many options to interact with the database, they include:
+- View all departments
+- View all departments
+- View all roles
+- View all employees
+- Add a department
+- Add a role
+- Add an employee
+- Update an employee role
+- Upadate an employee manager
+- View Employees by manager
+- View Employees by department
+- Delete a department
+- Delete a role
+- Delete an employee
+- View the total utilized budget of a department
+
+All of this options are avalaible to the user upon initizuionb. This all of different functions that will allow the user to interact with the database at their leisure.
+
+### Link to walkthorugh video
+https://drive.google.com/file/d/1aHRD2DRxVsFq-wRE9bIE7Xh1pNn6jT6b/view
 
 ## Contribution Guidelines
 This is a private project for instructional purposes. Future contributions are unlikely but possible.
@@ -37,4 +55,8 @@ GitHub: [imdawizard](https://github.com/imdawizard)
 
 Email: nate.is.cool.yeah@gmail.com
 
-https://drive.google.com/file/d/1aHRD2DRxVsFq-wRE9bIE7Xh1pNn6jT6b/view
+## Link to deployed application:
+
+
+## Screenshot:
+![Alt text](image-1.png)
