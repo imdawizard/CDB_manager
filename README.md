@@ -56,7 +56,7 @@ GitHub: [imdawizard](https://github.com/imdawizard)
 Email: nate.is.cool.yeah@gmail.com
 
 ## Link to deployed application:
-
+https://imdawizard.github.io/CDB_manager/
 
 ## Screenshot:
 ![Alt text](image-1.png)
