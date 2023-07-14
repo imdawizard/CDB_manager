@@ -179,3 +179,110 @@ function addRole() {
       });
   });
 }
+
+// Function to add an employee
+function addEmployee() {
+  const roleChoices = [];
+  const managerChoices = [
+    { name: 'None', value: null }
+  ];
+  connection.query('SELECT * FROM role', function(err, res) {
+    if (err) throw err;
+    res.forEach(function(role) {
+      roleChoices.push({
+        name: role.title,
+        value: role.id
+      });
+    });
+    connection.query('SELECT * FROM employee', function(err, res) {
+      if (err) throw err;
+      res.forEach(function(manager) {
+        managerChoices.push({
+          name: `${manager.first_name} ${manager.last_name}`,
+          value: manager.id
+        });
+      });
+      inquirer
+        .prompt([
+          {
+            name: 'first_name',
+            type: 'input',
+            message: "Enter the employee's first name:"
+          },
+          {
+            name: 'last_name',
+            type: 'input',
+            message: "Enter the employee's last name:"
+          },
+          {
+            name: 'role_id',
+            type: 'list',
+            message: "Select the employee's role:",
+            choices: roleChoices
+          },
+          {
+            name: 'manager_id',
+            type: 'list',
+            message: "Select the employee's manager:",
+            choices: managerChoices
+          }
+        ])
+        .then(function(answer) {
+          connection.query('INSERT INTO employee SET ?', answer, function(err, res) {
+            if (err) throw err;
+            console.log('Employee added successfully!');
+            startApp();
+          });
+        });
+    });
+  });
+}
+
+// Function to update an employee's role
+function updateEmployeeRole() {
+  const employeeChoices = [];
+  const roleChoices = [];
+  connection.query('SELECT * FROM employee', function(err, res) {
+    if (err) throw err;
+    res.forEach(function(employee) {
+      employeeChoices.push({
+        name: `${employee.first_name} ${employee.last_name}`,
+        value: employee.id
+      });
+    });
+    connection.query('SELECT * FROM role', function(err, res) {
+      if (err) throw err;
+      res.forEach(function(role) {
+        roleChoices.push({
+          name: role.title,
+          value: role.id
+        });
+      });
+      inquirer
+        .prompt([
+          {
+            name: 'employee_id',
+            type: 'list',
+            message: 'Select the employee to update:',
+            choices: employeeChoices
+          },
+          {
+            name: 'role_id',
+            type: 'list',
+            message: 'Select the new role for the employee:',
+            choices: roleChoices
+          }
+        ])
+        .then(function(answer) {
+          connection.query('UPDATE employee SET role_id = ? WHERE id = ?', [
+            answer.role_id,
+            answer.employee_id
+          ], function(err, res) {
+            if (err) throw err;
+            console.log('Employee role updated successfully!');
+            startApp();
+          });
+        });
+    });
+  });
+}
