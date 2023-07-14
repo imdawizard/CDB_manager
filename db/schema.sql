@@ -4,7 +4,7 @@ CREATE DATABASE employee_CMS_db;
 USE employee_CMS_db;
 
 CREATE TABLE department (
-    id INT,
+    id INT AUTO_INCREMENT,
     name VARCHAR(30) NOT NULL,
     PRIMARY KEY(id)
 );
