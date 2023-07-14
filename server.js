@@ -2,31 +2,12 @@ const express = require('express');
 const inquirer = require('inquirer');
 const mysql = require('mysql');
 
-// Import the connection object
-// const sequelize = require('sequelize');
-
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Connect to the database before starting the Express.js server
-// sequelize.sync().then(() => {
-//   app.listen(PORT, () => console.log('Now listening', startApp()));
-// });
-
-// async function testConnection() {
-//   try {
-//     await sequelize.authenticate();
-//     console.log('Connected to the MySQL server!');
-//     startApp();
-//   } catch (error) {
-//     console.error('Unable to connect to the MySQL server:', error);
-//   }
-// }
-
-// testConnection();
 // Creating a connection to the MySQL server
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -59,6 +40,14 @@ function startApp() {
           'Add a role',
           'Add an employee',
           'Update an employee role',
+
+          'Upadate an employee manager',
+          'View Employees by manager',
+          'View Employees by department',
+          'Delete a department',
+          'Delete a role',
+          'Delete an employee',
+          'View the total utilized budget of a department',
           'Exit'
         ]
       }
@@ -83,8 +72,26 @@ function startApp() {
         case 'Add an employee':
           addEmployee();
           break;
-        case 'Update an employee role':
-          updateEmployeeRole();
+        case 'Update an employee manager':
+          updateEmployeeManager();
+          break;
+        case 'View employees by manager':
+          viewEmployeesByManager();
+          break;
+        case 'View employees by department':
+          viewEmployeesByDepartment();
+          break;
+        case 'Delete a department':
+          deleteDepartment();
+          break;
+        case 'Delete a role':
+          deleteRole();
+          break;
+        case 'Delete an employee':
+          deleteEmployee();
+          break;
+        case 'View the total utilized budget of a department':
+          viewDepartmentBudget();
           break;
         case 'Exit':
           connection.end();
@@ -284,5 +291,124 @@ function updateEmployeeRole() {
           });
         });
     });
+  });
+}
+
+function updateEmployeeManager() {
+  inquirer.prompt([
+    {
+      name: 'employeeId',
+      type: 'number',
+      message: 'Enter the ID of the employee you want to update:',
+    },
+    {
+      name: 'managerId',
+      type: 'number',
+      message: 'Enter the new manager ID:',
+    },
+  ])
+  .then(answer => {
+    const employeeId = parseInt(answer.employeeId);
+    const managerId = parseInt(answer.managerId);
+
+    // Execute the SQL query to update the employee's manager
+    connection.query(
+      'UPDATE employee SET manager_id = ? WHERE id = ?',
+      [managerId, employeeId],
+      function(err, res) {
+        if (err) {
+          console.error('Error updating employee manager:', err);
+        } else {
+          console.log('Employee manager updated successfully!');
+        }
+        startApp();
+      }
+    );
+  });
+}
+
+// View employees by manager
+function viewEmployeesByManager() {
+  inquirer.prompt([
+    {
+      name: 'managerId',
+      type: 'input',
+      message: 'Enter the manager ID to view employees:',
+    },
+  ])
+  .then(answer => {
+    const managerId = parseInt(answer.managerId);
+
+    // Execute the SQL query to retrieve employees based on the manager ID
+    connection.query(
+      'SELECT * FROM employee WHERE manager_id = ?',
+      [managerId],
+      function(err, res) {
+        if (err) {
+          console.error('Error retrieving employees by manager:', err);
+        } else {
+          // Display the formatted table showing employee data for the selected manager
+          console.table(res);
+        }
+        startApp();
+      }
+    );
+  });
+}
+
+// View employees by department
+function viewEmployeesByDepartment() {
+  inquirer.prompt([
+    {
+      name: 'departmentId',
+      type: 'input',
+      message: 'Enter the department ID to view employees:',
+    },
+  ])
+  .then(answer => {
+    const departmentId = parseInt(answer.departmentId);
+
+    // Execute the SQL query to retrieve employees based on the department ID
+    connection.query(
+      'SELECT * FROM employee WHERE department_id = ?',
+      [departmentId],
+      function(err, res) {
+        if (err) {
+          console.error('Error retrieving employees by department:', err);
+        } else {
+          // Display the formatted table showing employee data for the selected department
+          console.table(res);
+        }
+        startApp();
+      }
+    );
+  });
+}
+
+// Delete a department
+function deleteDepartment() {
+  inquirer.prompt([
+    {
+      name: 'departmentId',
+      type: 'input',
+      message: 'Enter the ID of the department to delete:',
+    },
+  ])
+  .then(answer => {
+    const departmentId = parseInt(answer.departmentId);
+
+    // Execute the SQL query to delete the department
+    connection.query(
+      'DELETE FROM department WHERE id = ?',
+      [departmentId],
+      function(err, res) {
+        if (err) {
+          console.error('Error deleting department:', err);
+        } else {
+          console.log('Department deleted successfully!');
+        }
+        startApp();
+      }
+    );
   });
 }

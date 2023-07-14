@@ -1,42 +1,54 @@
-# CDB_manager
-The project for week 12, the sql to the pql
+# Note_taker_machine
+The project for week 11---Creating not taker that uses express.js back end to save and retireve notes.
+
+## Table of Contents
+ - [Installation](#installation)
+ - [usage](#usage)
+ - [License](#license)
+ - [Features](#featues)
+ - [Contribution Guidelines](#contributing)
+ - [Questons/Contact](#questions)
 
 
-Employee Tracker
-content management systems(CMS)
-node, inquirer, mysql
+## Installation
+You will need:
+1. Node downloaded onto your machine.
+2. Express also downloaded and initiated.
+3. an open browser(Insomnia is recommended).
 
-Acceptance Critera:
-GIVEN a command-line application that accepts user input
-WHEN I start the application
-THEN I am presented with the following options: view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role
-WHEN I choose to view all departments
-THEN I am presented with a formatted table showing department names and department ids
-WHEN I choose to view all roles
-THEN I am presented with the job title, role id, the department that role belongs to, and the salary for that role
-WHEN I choose to view all employees
-THEN I am presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
-WHEN I choose to add a department
-THEN I am prompted to enter the name of the department and that department is added to the database
-WHEN I choose to add a role
-THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
-WHEN I choose to add an employee
-THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
-WHEN I choose to update an employee role
-THEN I am prompted to select an employee to update and their new role and this information is updated in the database
+## Usage
+This web application has two pages, one, the landing page will have a button that when clicked will take to a note-taking page. It will allow you to enter in a note title and note text. The note will then be subseqently saved to the left of the page, along with previous notes.
 
-![Alt text](image.png)]
-Department
-id          int (pri)
-name        Varchar(30)
+## License
+This project does not currently have a license.
 
-Role
-id          int (pri)
-title       varchar(30)
-salary      decimal
-department_id       INT
+## Features
+Some of the many features of this program include:
+- back end database for storage of the notes
+- * feature for any other URL's that are not /api/notes.
 
-Employee
-id          int
-first_name  varchar(30)
-last_name   varcahr(30)
+## Contribution Guidelines
+This is a private project for instructional purposes. Future contributions are unlikely but possible.
+
+### Questions
+For any questions, please contact me:
+
+GitHub: [imdawizard](https://github.com/imdawizard)
+
+Email: nate.is.cool.yeah@gmail.com
+
+
+
+Upadate an employee manager',
+          'View Employees by department',
+          'Delete a department',
+          'Delete a role',
+          'View the total utilized budget of a department',
+
+          update an employee manager  updateEmployeeManager()
+          view employees by manager   viewEmployeesBymanager()
+          view employees by department  viewEmployeesByDepartment()
+          delete a department         deleteDepartment()
+          deletea roleq               deleteRole()
+          delete an employee          deleteEmployee()
+          view the total utilized budget of a department   viewDepartmentBudget()
