@@ -412,3 +412,59 @@ function deleteDepartment() {
     );
   });
 }
+
+// Delete a role
+function deleteRole() {
+  inquirer.prompt([
+    {
+      name: 'roleId',
+      type: 'input',
+      message: 'Enter the ID of the role to delete:',
+    },
+  ])
+  .then(answer => {
+    const roleId = parseInt(answer.roleId);
+
+    // Execute the SQL query to delete the role
+    connection.query(
+      'DELETE FROM role WHERE id = ?',
+      [roleId],
+      function(err, res) {
+        if (err) {
+          console.error('Error deleting role:', err);
+        } else {
+          console.log('Role deleted successfully!');
+        }
+        startApp();
+      }
+    );
+  });
+}
+
+function viewDepartmentBudget() {
+  inquirer.prompt([
+    {
+      name: 'departmentId',
+      type: 'input',
+      message: 'Enter the department ID to view the total utilized budget:',
+    },
+  ])
+  .then(answer => {
+    const departmentId = parseInt(answer.departmentId);
+
+    //Produces the sum of the salaries
+    connection.query(
+      'SELECT SUM(salary) AS total_budget FROM employee INNER JOIN role ON employee.role_id = role.id WHERE role.department_id = ?', [departmentId],
+      function(err, res) {
+        if (err) {
+          console.error('Error adding data', err);
+        } else {
+          const totalbudget = res[0].total_budget;
+          console.log(`The sum of the ${departmentId} department is $${totalbudget}`);
+        }
+        startApp();
+      }
+    );
+  });
+}
+    

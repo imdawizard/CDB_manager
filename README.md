@@ -37,18 +37,4 @@ GitHub: [imdawizard](https://github.com/imdawizard)
 
 Email: nate.is.cool.yeah@gmail.com
 
-
-
-Upadate an employee manager',
-          'View Employees by department',
-          'Delete a department',
-          'Delete a role',
-          'View the total utilized budget of a department',
-
-          update an employee manager  updateEmployeeManager()
-          view employees by manager   viewEmployeesBymanager()
-          view employees by department  viewEmployeesByDepartment()
-          delete a department         deleteDepartment()
-          deletea roleq               deleteRole()
-          delete an employee          deleteEmployee()
-          view the total utilized budget of a department   viewDepartmentBudget()
+https://drive.google.com/file/d/1aHRD2DRxVsFq-wRE9bIE7Xh1pNn6jT6b/view
